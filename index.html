@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.0/font/bootstrap-icons.css" integrity="sha384-7ynz3n3tAGNUYFZD3cWe5PDcE36xj85vyFkawcF6tIwxvIecqKvfwLiaFdizhPpN" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Schoolbell&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <title id="page-title"></title>
+</head>
+<body>
+ 
+<script>
+
+const INVITACION = {
+ 
+  // 👶 DATOS DEL FESTEJO
+  nombre:         "Valentina",          
+  nombreFin:      "Valentina",             
+  fechaTexto:     "19.09.26",        
+  fechaEvento:    "2026-09-19T14:00:00",
+ 
+  // 📍 LUGAR Y HORARIO
+  salon:          "Varsovia 3048",
+  horario:        "De 14 a 19 hs",
+  fechaDisplay:   "19 de Septiembre",    
+  linkMaps:       "https://www.google.com/maps/dir//Varsovia+3048,+C1431+Cdad.+Aut%C3%B3noma+de+Buenos+Aires/@-34.5839417,-58.4855335,17z/data=!4m17!1m7!3m6!1s0x95bcb66bac3fecb7:0xa6d7842d71a35513!2sVarsovia+3048,+C1431+Cdad.+Aut%C3%B3noma+de+Buenos+Aires!3b1!8m2!3d-34.5839417!4d-58.4829586!4m8!1m0!1m5!1m1!1s0x95bcb66bac3fecb7:0xa6d7842d71a35513!2m2!1d-58.4829586!2d-34.5839417!3e0?entry=ttu&g_ep=EgoyMDI2MDgxMi4wIKXMDSoASAFQAw%3D%3D",
+ 
+  // 📅 CONFIRMAR ASISTENCIA
+  fechaLimiteConfirm: "15 DE SEPTIEMBRE",   
+  linkConfirmar:  "https://wa.link/ao0mww",               
+ 
+  // 📅 AGENDAR EVENTO
+  linkAgendar:    "https://calendar.app.google/1jKcbTrsWbPzacVu7",
+ 
+  // 🎶 MÚSICA
+  archivoMusica:  "./toytoy.mp3",
+ 
+  // 👗 DRESS CODE (dejá vacío si no tiene)
+  dresscode:      false,         
+  dresscodeTexto: "SI QUERÉS Y PODÉS, NOS GUSTARÍA QUE INCLUYAS ALGUNOS DE ESTOS COLORES EN TUS PRENDAS",
+  dresscodeColores: "ROSA - LILA - AQUA - AZUL - BEIGE - BLANCO",
+ 
+  // 🏊 AVISO EXTRA AL FINAL (ej: traer traje de baño)
+  quote:          false,             
+  quoteTexto:     "NO OLVIDES TRAER TRAJE DE BAÑO Y TOALLA PARA DISFRUTAR EL DÍA.",
+ 
+  // 💌 MENSAJE PRINCIPAL
+  mensajePrincipal: "TE ESPERO PARA FESTEJAR MIS DOS AÑITOS",
+ 
+  // 🖼️ FOTOS (rutas a las imágenes)
+  fotos: {
+    galeria1: ["./img/1.png", "./img/1.png", "./img/1.png", "./img/1.png"],
+    galeria2: ["./img/2.png", "./img/3.png", "./img/4.png", "./img/5.png"],
+    galeria3: ["./img/6.png", "./img/6.png", "./img/6.png", "./img/6.png"],
+  },
+ 
+  // 🔗 REDES SOCIALES VOY (no tocar)
+  igVoy:        "https://www.instagram.com/voyinvitacionesweb/",
+  whatsappVoy:  "https://wa.link/nmjybu", // 
+};
+ 
+// ════════════════════════════════════════════════════════════
+//  🚫 
+// ════════════════════════════════════════════════════════════
+ 
+// Título de la página
+document.getElementById("page-title").textContent = INVITACION.nombre;
+ 
+// Función para renderizar el HTML usando las variables
+function render() {
+  document.body.innerHTML = `
+    <header>
+      <div class="header-info">
+        <div data-aos="fade-up" class="infoimportante">
+          <img src="./img/face.png" alt="">
+          <a class="boton" target="_blank" href="${INVITACION.linkAgendar}">AGENDAR</a>
+        </div>
+      </div>
+    </header>
+ 
+    <div data-aos="fade-up" class="countdown">
+      <p>FALTAN:</p>
+      <div id="clock"></div>
+    </div>
+ 
+    <div data-aos="fade-up" class="fecha">
+      <img src="./img/fecha.png" alt="">
+    </div>
+ 
+    <div class="galeria">
+      ${INVITACION.fotos.galeria1.map((f, i) => `<img class="f${i+1}" src="${f}" alt="foto">`).join('')}
+    </div>
+ 
+    <div class="segundo">
+      <p data-aos="fade-up">
+        ${INVITACION.mensajePrincipal}<br><br>
+        🎉 ${INVITACION.fechaDisplay}<br>
+        ⏰  ${INVITACION.horario}<br>
+        📍 ${INVITACION.salon}<br><br>
+        HACE CLICK PARA SABER CÓMO LLEGAR
+      </p>
+      <a data-aos="fade-up" class="boton2" target="_blank" href="${INVITACION.linkMaps}">CÓMO LLEGAR</a>
+    </div>
+ 
+    <div class="galeria2">
+      ${INVITACION.fotos.galeria2.map(f => `<img class="f1" src="${f}" alt="foto">`).join('')}
+    </div>
+ 
+    ${INVITACION.dresscode ? `
+    <div class="DRESSCODE">
+      <H2>DRESS CODE</H2>
+      <p data-aos="fade-up">${INVITACION.dresscodeTexto}</p><br>
+      <P>${INVITACION.dresscodeColores}</P>
+      <ul>
+        <li class="li1"></li>
+        <li class="li2"></li>
+        <li class="li3"></li>
+        <li class="li4"></li>
+        <li class="li5"></li>
+        <li class="li6"></li>
+      </ul>
+    </div>` : ''}
+ 
+    <main>
+      <div class="main-bloque">
+        <img data-aos="fade-up" src="./figuras/icon-3.png" alt="">
+        <p data-aos="fade-up">TU PRESENCIA ES MUY IMPORTANTE PARA MI, NO OLVIDES CONFIRMAR ASISTENCIA CON MIS PAPIS ${INVITACION.fechaLimiteConfirm}.</p>
+        <a data-aos="fade-up" class="boton" target="_blank" href="${INVITACION.linkConfirmar}">CONFIRMAR</a>
+      </div>
+    </main>
+ 
+    <div class="galeria">
+      ${INVITACION.fotos.galeria3.map((f, i) => `<img class="f${i+1}" src="${f}" alt="foto">`).join('')}
+    </div>
+ 
+    ${INVITACION.quote ? `
+    <div class="quote">
+      <p>${INVITACION.quoteTexto}</p>
+    </div>` : ''}
+ 
+    <div class="end">
+      <div><img src="./figuras/icon-1.png" alt=""></div>
+      <div>
+        <h2 data-aos="fade-up">${INVITACION.nombreFin}</h2>
+        <H3 data-aos="fade-up">${INVITACION.fechaTexto}</H3>
+      </div>
+      <div><img class="espejo" src="./figuras/icon-1.png" alt=""></div>
+    </div>
+ 
+    <div class="audiodiv">
+      <audio id="myAudio" preload="none">
+        <source src="${INVITACION.archivoMusica}" type="audio/mpeg">
+      </audio>
+      <div id="playPauseBtn" class="play">
+        <img src="./figuras/notamusical.png" alt="Icono de música">
+      </div>
+    </div>
+ 
+    <footer>
+      <div class="contenido">
+        <div><img src="./figuras/logo.png" alt=""></div>
+        <div>
+          <p>Hecho con &hearts;<br>
+          &#169 <b>VOY!</b>, invitaciones web.<br>
+          Todos los derechos reservados.</p>
+        </div>
+        <div class="contenido-list">
+          <ul>
+            <li><a target="_blank" href="${INVITACION.igVoy}"><i class="bi bi-instagram"></i></a></li>
+            <li><a target="_blank" href="${INVITACION.whatsappVoy}"><i class="bi bi-whatsapp"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  `;
+ 
+  // Cuenta regresiva
+  const countdownScript = document.createElement('script');
+  countdownScript.src = 'countdown.js';
+  document.body.appendChild(countdownScript);
+ 
+  // Música al scroll
+  document.addEventListener("scroll", function playOnScroll() {
+    const audio = document.getElementById("myAudio");
+    if (audio) {
+      audio.play().catch(e => console.warn("Autoplay bloqueado", e));
+      document.removeEventListener("scroll", playOnScroll);
+    }
+  });
+ 
+  // Reproductor
+  const repScript = document.createElement('script');
+  repScript.src = './reproductor.js';
+  document.body.appendChild(repScript);
+ 
+  // AOS animaciones
+  const aosScript = document.createElement('script');
+  aosScript.src = 'https://unpkg.com/aos@2.3.1/dist/aos.js';
+  aosScript.onload = () => AOS.init();
+  document.body.appendChild(aosScript);
+}
+ 
+render();
+</script>
+ 
+</body>
+</html>
+ 
